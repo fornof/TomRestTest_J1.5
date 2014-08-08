@@ -1,0 +1,15 @@
+This is a com.sun.jersey 1.15 answer to use @RolesAllowed() security annotations. 
+
+## TESTING
+
+:: please change this when using curl - your ports are probably different
+
+::curl -u robert:robert -basic http://localhost:8079/J1SecurityAnnotations/rest/hello/admin
+curl -u admin:adminadmin -basic http://localhost:8079/J1SecurityAnnotations/rest/hello/admin
+
+curl -u admin2:admin -basic http://localhost:8079/J1SecurityAnnotations/rest/hello/admin
+
+conf/tomcat-users.xml should include the users "robert" and "admin" as well as the roles "robert" and "admin"
+
+
+
