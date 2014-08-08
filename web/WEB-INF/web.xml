@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>JerseyFoo</servlet-name>
+        
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <description> Found this implementation in the RolesAllowedResourceFilterFactory.java source </description>
+            <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
+            <param-value>com.sun.jersey.api.container.filter.RolesAllowedResourceFilterFactory</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <security-role-ref>
+            <description/>
+            <role-name>robert</role-name>
+            <role-link>robert</role-link>
+        </security-role-ref>
+               <security-role-ref>
+            <description/>
+            <role-name>admin</role-name>
+            <role-link>admin</role-link>
+        </security-role-ref>
+    </servlet>     
+        
+      
+    <servlet-mapping>
+        <servlet-name>JerseyFoo</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+       <security-constraint>
+           <display-name>JerseyFooConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>JerseyFooSecured</web-resource-name>
+             <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>*</role-name>
+        </auth-constraint>
+        
+    </security-constraint>
+    
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>UserDatabaseRealm</realm-name>
+    </login-config>
+<!--    <security-role>
+        <description/>
+        <role-name>admin</role-name>
+    </security-role>
+        <security-role>
+        <description/>
+        <role-name>robert</role-name>
+    </security-role>-->
+</web-app>
